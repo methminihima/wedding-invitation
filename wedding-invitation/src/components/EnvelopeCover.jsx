@@ -24,11 +24,7 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
     setIsFadingOut(true)
     setIsTransitionActive(false)
     if (videoRef.current) {
-      try {
-        videoRef.current.pause()
-      } catch (e) {
-        console.log(e)
-      }
+      try { videoRef.current.pause() } catch (e) { console.log(e) }
     }
     setTimeout(() => {
       setIsDismissed(true)
@@ -36,22 +32,15 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
     }, 500)
   }
 
-  // Safety fallback if onEnded or onTimeUpdate does not fire
+  // Safety fallback — if onEnded doesn't fire, dismiss after 12s
   useEffect(() => {
     if (isPlayingTransition && isTransitionActive) {
       const timer = setTimeout(() => {
         handleFinish()
-      }, 7900)
+      }, 12000)
       return () => clearTimeout(timer)
     }
   }, [isPlayingTransition, isTransitionActive])
-
-  const handleTimeUpdate = (e) => {
-    // When video reaches 7.5s (names SANDARUWAN & SASINI are fully showing), immediately transition
-    if (e.target.currentTime >= 7.5 && !isFadingOut) {
-      handleFinish()
-    }
-  }
 
   const handleOpen = () => {
     if (isPlayingTransition) return
@@ -112,7 +101,7 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
         </button>
       </div>
 
-      {/* Main Content Container - pushed further down */}
+      {/* Main Content Container */}
       <div className={`relative z-10 w-full max-w-lg p-6 sm:p-10 text-center flex flex-col items-center mt-auto mb-auto pt-28 sm:pt-40 transition-opacity duration-500 ${
         isPlayingTransition ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}>
@@ -151,7 +140,7 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
         </button>
       </div>
 
-      {/* True Full-screen Wedding Video Transition Screen */}
+      {/* Full-screen Wedding Video Transition — plays fully before site loads */}
       {isPlayingTransition && (
         <div
           className={`fixed inset-0 z-[100] w-full h-[100dvh] bg-[#FAF7EE] flex items-center justify-center overflow-hidden transition-opacity duration-500 ease-in-out ${
@@ -160,18 +149,7 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
               : 'opacity-0 pointer-events-none'
           }`}
         >
-          {/* Top Skip Button */}
-          <div className="absolute top-5 right-5 z-30">
-            <button
-              onClick={handleFinish}
-              className="px-4 py-1.5 rounded-full bg-[#3E2A1E]/85 backdrop-blur-md border border-[#D3BD86]/80 text-[#FAF7EE] text-xs font-semibold tracking-wider hover:bg-[#3E2A1E] hover:scale-105 active:scale-95 transition-all shadow-xl flex items-center gap-1.5 cursor-pointer"
-            >
-              <span>SKIP</span>
-              <span className="text-[10px]">→</span>
-            </button>
-          </div>
-
-          {/* 100% Edge-to-Edge Full Screen Video */}
+          {/* Full Screen Video — plays completely, site loads only after onEnded */}
           <video
             ref={videoRef}
             src={vvidMp4}
@@ -179,7 +157,6 @@ function EnvelopeCover({ onOpen, isMuted, onToggleMute }) {
             playsInline
             muted
             loop={false}
-            onTimeUpdate={handleTimeUpdate}
             onEnded={handleFinish}
             className="w-full h-full object-cover pointer-events-none"
           />

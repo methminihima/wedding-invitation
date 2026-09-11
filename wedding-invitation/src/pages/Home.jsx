@@ -11,7 +11,7 @@ import CountdownTimer from '../components/CountdownTimer'
 import bgImage from '../images/bg.png'
 import bgMobile from '../images/bg 2.png'
 import vidMandala from '../images/vid.mp4'
-import couplesWebm from '../images/couples2.webm'
+import coupleImg from '../images/couple_transparent.png'
 import kkcImage from '../images/kkc.png'
 
 function Home({ onReopenEnvelope }) {
@@ -108,14 +108,11 @@ function Home({ onReopenEnvelope }) {
             </div>
           </div>
 
-          {/* Traditional Couple Animation (WebM with alpha transparency) */}
+          {/* Traditional Couple Illustration (Transparent PNG - works on iOS & Android) */}
           <div className="mt-2 mb-2 flex justify-center">
-            <video
-              src={couplesWebm}
-              autoPlay
-              loop
-              muted
-              playsInline
+            <img
+              src={coupleImg}
+              alt="Sasini & Sandaruwan"
               className="w-56 sm:w-64 md:w-72 object-contain drop-shadow-sm pointer-events-none"
             />
           </div>
