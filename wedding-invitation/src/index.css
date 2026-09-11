@@ -1,0 +1,123 @@
+@import "tailwindcss";
+
+/* Local Cormorant Garamond Font Faces */
+@font-face {
+  font-family: 'CormorantBoldItalic';
+  src: url('./fonts/CormorantGaramond-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CormorantVariable';
+  src: url('./fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer utilities {
+
+  /* Couple names font - Bold Italic local file */
+  .font-couple-name {
+    font-family: 'CormorantBoldItalic', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  /* Date & body serif font - Variable weight local file */
+  .font-cormorant {
+    font-family: 'CormorantVariable', 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .font-playfair {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-script {
+    font-family: 'Great Vibes', cursive;
+  }
+}
+
+/* Base custom styles - Ariya Sinhala Kandyan */
+body {
+  font-family: 'CormorantVariable', 'EB Garamond', Georgia, serif;
+  background-color: #F7F2E7;
+  color: #3F3B29;
+  line-height: 1.7;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EFE8D6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B49A55;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8C7134;
+}
+
+/* Ariya Kandyan Luxury Card Style */
+.ariya-card {
+  background: linear-gradient(180deg, rgba(252, 249, 240, 0.75) 0%, rgba(241, 233, 212, 0.75) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid #D3BD86;
+  box-shadow: 0 24px 50px -38px rgba(140, 113, 52, 0.4);
+  border-radius: 24px;
+  position: relative;
+}
+
+.ariya-card-inner-border {
+  position: absolute;
+  inset: 8px;
+  border-radius: 18px;
+  border: 1px solid rgba(180, 154, 85, 0.45);
+  pointer-events: none;
+}
+
+/* Keyframes animations */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.7;
+  }
+
+  90% {
+    opacity: 0.7;
+  }
+
+  100% {
+    transform: translateY(105vh) rotate(360deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
